@@ -76,52 +76,7 @@ void the_turk(t_list **stack_a, t_list **stack_b)
 	the_turk_part_two(stack_a, stack_b);
 }
 
-void	fillstack(t_list **stack, char watstack, t_list **targetstack)
-{
-	t_list *node;
-	node = *stack;
-	if (watstack == 'A' && targetstack)
-		fillstack(targetstack, 'B', NULL);
-	else if (watstack == 'B' && targetstack)
-		fillstack(targetstack, 'A', NULL);
-	while (node)
-	{
-		// print_stack(*stack);
-		fillnode(node, stack,  watstack, targetstack);
-		node =node->next;
-	}
-	
-}
-void fillnode(t_list *node, t_list **stack, char watstack, t_list **targetstack)
-{
-	if (node->prev)
-		node->index = node->prev->index + 1;
-	else
-		node->index = 0;
-	node->stack = watstack;
-	if (targetstack)
-		findcost(node,targetstack, stack);
-	else
-	{
-		node->target = NULL;
-		node->cheapest =false;
-		node->cost = -1;
-	}
-	
-}
-void fill_index(t_list **stack)
-{
-	int i;
-	t_list *node;
-	node = *stack;
-	i = 0;
-	while (node)
-	{
-		node->index = i;
-		node = node->next;
-		i++;
-	}
-}
+
 void findcost(t_list *node, t_list **targetstack, t_list **stack)
 {
     findtargetnode(node, targetstack);
@@ -365,7 +320,7 @@ void targetnodefor_a(t_list *node,t_list **targetstack)
 			targetnode = targetnode->next;
 		}
 	}
-	// print_info(node);
+	
 }
 void targetnodefor_b(t_list *node,t_list **targetstack)
 {
@@ -388,7 +343,6 @@ void targetnodefor_b(t_list *node,t_list **targetstack)
 			targetnode = targetnode->next;
 		}
 	}
-	// print_info(node);
 }
 
 void clear_priceinfo(t_list **stack, t_list **targetstack)
@@ -438,8 +392,6 @@ void	fix_stack_rotates(t_list **stack)
 }
 void the_turk_part_two(t_list **stack_a, t_list **stack_b)
 {
-	print_stack(*stack_a);
-	print_stack(*stack_b);
 	sort3(stack_a);
 	while (count_nodes(*stack_b) > 0)
 	{
@@ -448,23 +400,9 @@ void the_turk_part_two(t_list **stack_a, t_list **stack_b)
 		fillstack(stack_b, 'B', stack_a);
 		find_cheapest(stack_b);
  		move_cheapest(stack_b, stack_a);
-		// print_stack(*stack_a);
 		PA(stack_b, stack_a);
-		// printf("\n");
-		// print_stack(*stack_a);
-		// printf("\n B\t");
-		// print_stack(*stack_b);
-		// printf("\n");
-		// printf("\n");
 	}
-	// print_stack(*stack_a);
 	fix_stack_rotates(stack_a);
-	// print_stack(*stack_a);
-	// print_info(*stack_a);
-	// printf("\n");
-	// print_stack(*stack_b);
-	// print_info(*stack_b);10
-	
 	exit ((free_all(stack_a, stack_b), 0));
 }
 

@@ -40,6 +40,8 @@ int arrayintonodes(char ** array, t_list **stack)
 	i = 0;
 	while (array[i])
 	{
+		if (check_if_number(array[i]) == 0)
+			return (1);
 		num =ft_atoi(array[i]);
 		nodetmp = new_node(num);
 		if (!nodetmp)
@@ -56,7 +58,10 @@ int make_stack(t_list **stack, int argc, char const *argv[])
  	while (i < argc)
 	{
 		if(arrayintonodes(ft_split(argv[i], ' '), stack))
+		{
+			write(2, "Error\n", 7);
 			return (1);
+		}
 		i++;
 	}
 	same_args(stack);
