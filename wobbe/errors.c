@@ -1,22 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   errors.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: wwiedijk <wwiedijk@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/01/13 19:56:14 by wwiedijk      #+#    #+#                 */
+/*   Updated: 2026/01/15 15:26:54 by wwiedijk      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Pushswap.h"
-int check_args(int argc, char const *argv[])
+
+int	check_args(int argc, char const *argv[])
 {
 	if (argc < 2)
 	{
-		write(2, "Error\n", 7);
 		exit(1);
 	}
-	if(argc == 2 && argv[1][0] == '\0')
+	if (argc == 2 && argv[1][0] == '\0')
 	{
 		write(2, "Error\n", 7);
 		exit(1);
 	}
 	return (0);
 }
-void same_args(t_list **stack)
+
+void	same_args(t_list **stack)
 {
-	t_list *tmp;
-	t_list *node;
+	t_list	*tmp;
+	t_list	*node;
+
 	node = *stack;
 	while (node)
 	{
@@ -26,18 +40,17 @@ void same_args(t_list **stack)
 			if (node->number == tmp->number)
 			{
 				write(2, "Error\n", 7);
-				exit ((free_all(stack, NULL), 1));
+				exit((free_all(stack, NULL), 1));
 			}
 			tmp = tmp->next;
 		}
 		node = node->next;
 	}
-	
 }
 
-int check_if_number(char *str)
+int	check_if_number(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str[i] == '-' || str[i] == '+')
@@ -49,4 +62,17 @@ int check_if_number(char *str)
 		i++;
 	}
 	return (1);
+}
+
+bool check_size(long num)
+{
+	if(num > INT_MAX)
+	{
+		return(false);
+	}
+	if (num < INT_MIN)
+	{
+		return(false);
+	}
+	return(true);
 }

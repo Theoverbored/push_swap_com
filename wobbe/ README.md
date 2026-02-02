@@ -20,6 +20,12 @@ Key points:
 for mac https://cdn.intra.42.fr/document/document/44202/checker_Mac
 for linux https://cdn.intra.42.fr/document/document/44203/checker_linux
 
+and to make that you can run it
+
+```bash
+chmod +x checker_linux 
+```
+
 ### Usage
 - Basic usage:
 ```bash
@@ -41,9 +47,13 @@ make
 
 ```bash
 # Generate operations and validate with checker
-./push_swap 3 2 1 | ./checker_linux 3 2 1
+ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker_linux $ARG
 ```
 
+100 random numbers:
+https://numbergenerator.org/randomnumbergenerator#!numbers=100&low=-2147483647&high=2147483647&unique=true&csv=&oddeven=&oddqty=0&sorted=false&addfilters=
+500 random numbers:
+https://numbergenerator.org/randomnumbergenerator#!numbers=500&low=-2147483647&high=2147483647&unique=true&csv=&oddeven=&oddqty=0&sorted=false&addfilters=
 ## Project structure (selected files)
 
 - `main.c`, `sort.c`, `stack1.c`, `operations1.c`, `utils.c` — core program logic.
